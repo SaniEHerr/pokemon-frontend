@@ -14,9 +14,11 @@ import {
 
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_PUBLIC_API;
+
 export const getAllPokemons = () => {
   return async (dispatch) => {
-    const apiResponse = await axios.get("http://localhost:3001/pokemon");
+    const apiResponse = await axios.get(`${API_URL}/pokemon`);
     const pokemonsData = apiResponse.data;
 
     dispatch({
@@ -28,7 +30,7 @@ export const getAllPokemons = () => {
 
 export const getAllTypes = () => {
   return async (dispatch) => {
-    const apiResponse = await axios.get("http://localhost:3001/types");
+    const apiResponse = await axios.get(`${API_URL}/types`);
     const pokemonData = apiResponse.data;
 
     dispatch({
@@ -49,7 +51,7 @@ export const orderedPokemons = (order = "NOORDER") => {
 export const getPokemonDetail = (pokemonId) => {
   return async (dispatch) => {
     const apiResponse = await axios.get(
-      `http://localhost:3001/pokemon/${pokemonId}`
+      `${API_URL}/pokemon/${pokemonId}`
     );
     const pokemonDetail = apiResponse.data;
 
@@ -62,7 +64,7 @@ export const getPokemonDetail = (pokemonId) => {
 
 export const addPokemon = (payload) => {
   return async (dispatch) => {
-    const response = await axios.post("http://localhost:3001/pokemon", payload);
+    const response = await axios.post(`${API_URL}/pokemon`, payload);
     dispatch({ type: ADD_POKEMON, payload: response.data });
   };
 };
